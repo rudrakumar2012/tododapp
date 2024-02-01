@@ -11,6 +11,7 @@ function App() {
   const [state, setState] = useState(null);
 
   useEffect(()=>{
+    getTasks();
     if(window.ethereum){
       window.ethereum.on("accountsChanged", handleAccountsChanged);
     }
@@ -23,7 +24,7 @@ function App() {
         );
       }
     };
-  },[provider]);
+  },[]);
 
   function handleAccountsChanged(accounts){
     if(accounts.length > 0 && account !== account[0]){
@@ -53,6 +54,17 @@ function App() {
     }
   }
 
+  async function getTasks() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(provider);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+        const contractABI = abi.abi;
+        const contract = new ethers.Contract(contractAddress, contractABI, signer);
+        setState({contract});
+        console.log(contract);
+  }
 
   return (
     <div>

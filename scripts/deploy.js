@@ -6,7 +6,7 @@ async function main() {
   await ToDoList.waitForDeployment();
 
   console.log(
-    `Contract deployed to ${lock.target}`
+    `Contract deployed to ${ToDoList.target}`
   );
 }
 

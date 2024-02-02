@@ -1,12 +1,12 @@
 const hre = require("hardhat");
 
 async function main() {
-  const ToDoList = await hre.ethers.deployContract("ToDoList");
+  const TaskContract = await hre.ethers.deployContract("TaskContract");
 
-  await ToDoList.waitForDeployment();
+  await TaskContract.waitForDeployment();
 
   console.log(
-    `Contract deployed to ${ToDoList.target}`
+    `Contract deployed to ${TaskContract.target}`
   );
 }
 

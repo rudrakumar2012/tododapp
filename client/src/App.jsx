@@ -24,23 +24,14 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  localStorage.setItem('isConnected', isConnected);
+  localStorage.setItem('isConnected', JSON.stringify(isConnected));
 }, [isConnected]);
 
 useEffect(() => {
-    if (isConnected) {
-      getAllTasks();
-    }
+  if (isConnected) {
+    getAllTasks();
+  }
 }, [isConnected]);
-
-function handleAccountsChanged(accounts) {
-    if (accounts.length > 0 && account !== accounts[0]) {
-      setAccount(accounts[0]);
-    } else {
-      setIsConnected(false);
-      setAccount(null);
-    }
-}
 
 useEffect(() => {
   if (provider) {
@@ -50,6 +41,15 @@ useEffect(() => {
     };
   }
 }, [provider]);
+
+function handleAccountsChanged(accounts) {
+    if (accounts.length > 0 && account !== accounts[0]) {
+      setAccount(accounts[0]);
+    } else {
+      setIsConnected(false);
+      setAccount(null);
+    }
+}
 
 const getAllTasks = async () => {
     if (!window.ethereum || !isConnected) return;
@@ -69,7 +69,6 @@ async function connectToMetamask() {
         const signer = provider.getSigner();
         const address = await signer.getAddress();
         setAccount(address);
-        localStorage.setItem('connectedAccount', address);
         console.log("Metamask Connected: " + address);
         setIsConnected(true);
       } catch (error) {

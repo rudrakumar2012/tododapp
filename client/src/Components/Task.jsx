@@ -1,10 +1,10 @@
-function Task(props) {
+const Task = ({taskText, onClick})=> {
     return (
         <div>
-            <h1 className="my-4">Welcome to Task Management Dapp</h1>
-            <p className="mb-4">Metamask Account: {props.account}</p>
+            <p>{taskText}</p>
+            <button onClick={onClick}>Delete</button>
         </div>
     );
 }
 
-export default Task
+export default Task;

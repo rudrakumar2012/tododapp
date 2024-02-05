@@ -75,7 +75,7 @@ async function connectToMetamask() {
         alert(error);
       }
     } else {
-      console.error("Metamask is not detected in the browser");
+      alert("Metamask is not detected in the browser");
     }
 }
 
